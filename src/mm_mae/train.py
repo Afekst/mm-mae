@@ -1,5 +1,6 @@
 # src/mm_mae/train.py
-import hydra, pytorch_lightning as pl
+import hydra 
+import pytorch_lightning as pl
 from omegaconf import DictConfig
 
 @hydra.main(version_base=None, config_path="../../configs/train", config_name="default")
