@@ -1,0 +1,9 @@
+seed: 42
+data:
+  root: ${oc.env:DATA_ROOT, "data/ht100m_50k"}
+  batch_size: 4
+model:
+  mask_prob: 0.5
+trainer:
+  max_epochs: 3
+  gpus: 1

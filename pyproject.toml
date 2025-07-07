@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "mm-mae"
+version = "0.1.0"
+description = ""
+authors = ["Afek Steinberg <afeks98@outlook.com>"]
+readme = "README.md"
+
+packages = [
+    { include = "mm_mae", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+hydra-core = "^1.3.2"
+pytorch-lightning = "^2.5.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+isort = "^6.0.1"
+ruff = "^0.12.2"
+pre-commit = "^4.2.0"
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

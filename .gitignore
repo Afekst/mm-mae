@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+# DL artefacts
+ckpts/
+data/
+# Environments
+.env
+.venv
+# Jupyter
+.ipynb_checkpoints/
