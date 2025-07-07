@@ -1,14 +1,12 @@
 name: CI
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.11"]
+        python-version: ["3.12"]          # 🔹 align with pyproject
 
     steps:
       - uses: actions/checkout@v4
@@ -16,12 +14,14 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}   # ← fixed
+          python-version: ${{ matrix.python-version }}
 
       - name: Cache Poetry
         uses: actions/cache@v3
         with:
-          path: ~/.cache/pypoetry
+          path: |
+            ~/.cache/pypoetry
+            ~/.cache/pip       # speeds up wheels too
           key: poetry-${{ hashFiles('**/pyproject.toml') }}
 
       - name: Install deps
@@ -29,10 +29,12 @@ jobs:
           pip install poetry
           poetry install --with dev
 
-      - name: Lint / format
-        run: |
-          poetry run ruff src tests
-          poetry run black --check src tests
+      # 🔹 Ruff now needs `check`
+      - name: Lint (ruff)
+        run: poetry run ruff check src tests
+
+      - name: Format check (black)
+        run: poetry run black --check src tests
 
       - name: Tests
         run: poetry run pytest --cov=src
